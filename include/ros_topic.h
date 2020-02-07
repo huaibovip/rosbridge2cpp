@@ -23,6 +23,11 @@ namespace rosbridge2cpp{
         ros_(ros), topic_name_(topic_name), message_type_(message_type){
         }
 
+      // ~ROSTopic(){
+      //     this->Unadvertise();
+      //     this->Unsubscribe([&](const ROSBridgePublishMsg& msg){});
+      // }
+
       // Subscribes to a ROS Topic and registers a callback function
       // for incoming messages
       // Multiple callback functions for the same topic within the same instance

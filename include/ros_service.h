@@ -20,6 +20,10 @@ namespace rosbridge2cpp{
         ros_(ros), service_name_(service_name), service_type_(service_type){
         }
 
+      // ~ROSService() {
+      //     this->Unadvertise();
+      // }
+
       // Advertise a service and define the request handling callback
       // The given callback will handle all service requests.
       //

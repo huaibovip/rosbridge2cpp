@@ -3,7 +3,7 @@
 namespace rosbridge2cpp{
   bool SocketTCPConnection::Init(std::string p_ip_addr, int p_port){
 
-#ifdef WIN32
+#ifdef WINDOWS
 	  //version request
 	  WSADATA wsaData;
 	  int win_error = WSAStartup(MAKEWORD(2, 2), &wsaData);
@@ -25,12 +25,12 @@ namespace rosbridge2cpp{
       perror("[TCPConnection] Could not create socket");
     }
 	std::cout << "[TCPConnection] Socket created\n";
-#endif // !WIN32
+#endif // !WINDOWS
 
 	// Set up IP address
 	port_ = p_port;
 	ip_addr_ = p_ip_addr;
-#ifdef WIN32
+#ifdef WINDOWS
 	connect_to_.sin_addr.S_un.S_addr = inet_addr(ip_addr_.c_str());
 #else
 	connect_to_.sin_addr.s_addr = inet_addr(ip_addr_.c_str());
@@ -38,7 +38,7 @@ namespace rosbridge2cpp{
     connect_to_.sin_family = AF_INET;
     connect_to_.sin_port = htons( port_ );
 
-#ifdef WIN32
+#ifdef WINDOWS
 	if(connect(sock_, (struct sockaddr *)&connect_to_, sizeof(connect_to_)) == SOCKET_ERROR)
 	{
 	  perror("[TCPConnection] connect failed. Error");
@@ -50,7 +50,7 @@ namespace rosbridge2cpp{
 	  perror("[TCPConnection] connect failed. Error");
 	  return false;
 	}
-#endif // WIN32
+#endif // WINDOWS
 
     std::cout << "[TCPConnection] Connected\n";
 

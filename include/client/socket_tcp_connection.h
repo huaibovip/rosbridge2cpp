@@ -4,9 +4,9 @@
 #include <thread>
 #include <iomanip>
 
-#define WIN32 1
+/* #undef WINDOWS */
 
-#ifdef WIN32
+#ifdef WINDOWS
 #include <WinSock2.h>
 #include <io.h>
 #include <process.h>
@@ -37,7 +37,7 @@ namespace rosbridge2cpp{
       ~SocketTCPConnection (){
         std::cout << "Connection Destructor called " << std::endl;
         std::cout << "Closing Socket" << std::endl;
-#ifdef WIN32
+#ifdef WINDOWS
 		closesocket(sock_);
 		WSACleanup();
 #else
@@ -78,7 +78,7 @@ namespace rosbridge2cpp{
       int port_;
 
 
-#ifdef WIN32
+#ifdef WINDOWS
 	  SOCKET sock_;
 #else //Linux/Unix
 	  int sock_ = socket(AF_INET, SOCK_STREAM, 0);
